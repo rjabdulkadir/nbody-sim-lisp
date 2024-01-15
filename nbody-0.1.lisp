@@ -13,7 +13,6 @@
        (inv-r3-tmp (numcl:asarray (numcl:+       
            (numcl:expt dx 2) (numcl:expt dy 2) (numcl:expt dz 2) (numcl:expt softening 2))))
        ; inv_r3[inv_r3>0] = inv_r3[inv_r3>0]**(-1.5)
-       ; (inv-r3-tmp (numcl:asarray inv-r3-tmp))
        (inv-r3 (numcl:expt inv-r3-tmp -1.5))
        ; ax = G * (dx * inv_r3) @ mass
        (dx-tmp (numcl:asarray (numcl:* dx inv-r3)))
