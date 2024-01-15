@@ -4,5 +4,4 @@ To run:
 1. Install Tk
 2. Install SBCL.
 3. Install Quicklisp
-4. On the command line:
-5.   sbcl --dynamic-space-size 3076 --load nbody-0.1.lisp
+4. On the command line: sbcl --dynamic-space-size 3076 --load nbody-0.1.lisp
