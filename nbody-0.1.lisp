@@ -56,13 +56,13 @@
     (list kinetic-energy potential-energy)))
 
 
-(defun main ()
+(defun main (&key (save-data nil))
   "n-body simulatrion"
   (nodgui:with-nodgui ()
     (nodgui:wm-title nodgui:*tk* "n-body Simulation")
-    (let* ((particle-count 50)
+    (let* ((particle-count 10)
            (current-time 0)  
-           (end-time 50.00)
+           (end-time 1.0)
            (time-step 0.01)
            (softening 0.1)
            (gravitational-constant 1.0)
@@ -123,7 +123,10 @@
         (setf (numcl:aref saved-positions '(0 100) '(0 3) (+ i 1)) pos)
         (setf (numcl:aref saved-kinetic-energies (1+ i)) (first energies))
         (setf (numcl:aref saved-potential-energies (1+ i)) (second energies))
-        (format t "~a, Energies: KE:~,vf PE:~,vf KE+PE:~,vf~%" i 3 (first energies) 3 (second energies) 3 (apply '+ energies))
-        ))))
+        (format t "~a, Energies: KE:~,vf PE:~,vf KE+PE:~,vf~%" i 3 (first energies) 3 (second energies) 3 (apply '+ energies)))
+      (if save-data
+	  (with-open-file (stream "/home/riyadh/nbody.dat" :direction :output)
+	    (dotimes (i number-of-steps)
+	      (format stream "~a~%" (numcl:aref saved-positions 0))))))))
 
-(main)
+(main :save-data t)
